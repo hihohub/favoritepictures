@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            div {
+                display: flex;
+                justify-content: center;
+            }
+            form {
+                display: inline-flex;
+                flex-direction: column;
+                align-items: flex-start;
+                row-gap: 10px;
+                padding: 10px;
+                border: 1px solid black;
+                font-weight: bold;
+                font-family: Arial;
+                color: hsl(0,0%,60%);
+            }
+            form h1 {
+                font-family: Tahoma;
+                color: hsl(0,0%,20%);
+            }
+            form input[type=submit], form button {
+                padding: 10px;
+                font-family: Arial;
+                font-size: 1.3em;
+                background-color: hsl(0,0%,60%);
+                color: #fff;
+                transition-property: top, right;
+            }
+            form input[type=submit]:hover, form button:hover {
+                position: relative;
+                top: -3px;
+                right: -3px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <form action="/validate" method="post">
+                <h1>LOG IN</h1>
+                <label for="username">USER NAME</label>
+                <input type="text" name="username">
+                <label for="password">PASSWORD</label>
+                <input type="password" name="password">
+                <input type="submit" value="submit">
+            </form>
+        </div>
+    </body>
+</html>

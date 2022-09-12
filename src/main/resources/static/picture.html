@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+    <script type="text/javascript">
+        onload = () => {
+            if(window.location.search){
+                username = window.location.search.split("?")[1].split("=")[1];
+                localStorage.setItem("username",username);
+            } else {
+                username = localStorage.getItem("username");
+            }
+            document.getElementById("username").value = username;
+            fetch("/findPicturesByUsername?username=" + username).then(data => data.text()).then(text => handletext(text));
+        }
+        function handletext(text){
+            if(text){
+                document.getElementsByTagName("section")[0].innerHTML = text;
+            }
+        }
+    </script>
+    <style>
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        section {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        form {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            row-gap: 20px;
+            border: 1px solid gray;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Upload Picture</h1>
+        <form action="/picture" method="post" enctype="multipart/form-data">
+            <input type="file" name="picture">
+            <input type="text" name="username" id="username" style="display:none;">
+            <input type="submit" value="submit">
+        </form>
+        <h1>Your pictures</h1>
+        <section></section>
+    </div>
+</body>
+</html>

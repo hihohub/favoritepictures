@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+            onload = () => {
+                let id = window.location.search.split("?")[1].split("=")[1];
+                fetch("/getEncoding?id=" + id).then(data => data.json()).then(json => handleresponse(json));
+            }
+            function handleresponse(json){
+                let ext = json.ext;
+                let enc = json.enc;
+                let src = "data:image/" + ext + ";base64, " + enc;
+                document.getElementsByTagName("img")[0].setAttribute("src",src);
+            }
+        </script>
+        <style>
+            div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <img src="">
+            <a href="picture.html">return</a>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SIGN UP</title>
+    <script type="text/javascript">
+        handleform = async () => {
+            window.event.preventDefault();
+            let username = document.getElementsByName('username')[0].value;
+            let password = document.getElementsByName('password')[0].value;
+            let post = "username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password);
+            let contenttype = "application/x-www-form-urlencoded";
+            let endpoint = "/new";
+            let response = await fetch(endpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": contenttype
+                },
+                body: post
+            });
+            if(response.ok) {
+                let text = await response.text();
+                if(text){
+                    document.write("<p>wrote to database #" + text + "</p><p>" + username + "</p><p>" + password + "</p><a href='/index'>return</a>");
+                }
+            } else {
+                document.write("error writing to database");
+            }
+        }
+        json = async () => {
+            window.event.preventDefault();
+            let username = document.getElementsByName('username')[0].value;
+            let password = document.getElementsByName('password')[0].value;
+            let json = { "userName": username, "password": password }
+            let post = JSON.stringify(json);
+            let contenttype = "application/json";
+            let endpoint = "/json";
+            let response = await fetch(endpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": contenttype
+                },
+                body: post
+            });
+            if(response.ok) {
+                let text = await response.text();
+                if(text){
+                    document.write("<p>wrote to database #" + text + "</p><p>" + username + "</p><p>" + password + "</p><a href='/index'>return</a>");
+                }
+            } else {
+                document.write("error writing to database");
+            }
+        }
+    </script>
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            row-gap: 10px;
+            padding: 10px;
+            border: 1px solid black;
+            font-weight: bold;
+            font-family: Arial;
+            color: hsl(0,0%,60%);
+        }
+        form h1 {
+            font-family: Tahoma;
+            color: hsl(0,0%,20%);
+        }
+        form input[type=submit], form button {
+            padding: 10px;
+            font-family: Arial;
+            font-size: 1.3em;
+            background-color: hsl(0,0%,60%);
+            color: #fff;
+            transition-property: top, right;
+        }
+        form input[type=submit]:hover, form button:hover {
+            position: relative;
+            top: -3px;
+            right: -3px;
+        }
+    </style>
+</head>
+<body>
+
+<main>
+<form action="/new" method="post" onsubmit="return json();">
+    <h1>SIGN UP</h1>
+    <label for="username">username</label>
+    <input type="text" name="username">
+    <label for="password">password</label>
+    <input type="password" name="password">
+    <input type="submit" value="submit">
+</form>
+</main>
+
+</body>
+</html>

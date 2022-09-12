@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+            onload = () => {
+                fetch("/list").then(data => data.text()).then(text => handletext(text));
+            }
+            function handletext(text){
+                if(text){
+                    document.write(text);
+                } else {
+                    document.write("error - could not retrieve response");
+                }
+            }
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
