@@ -32,7 +32,7 @@ public class PictureController {
     public String index(){
         return "redirect:/index.html";
     }
-    @PostMapping("/picture")
+    
     @RequestMapping(value="/picture",method=RequestMethod.POST)
     public String uploadPicture(@RequestParam("username") String username, @RequestParam("picture") MultipartFile multipartFile) throws IOException {
         String extension = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf(".") + 1);
